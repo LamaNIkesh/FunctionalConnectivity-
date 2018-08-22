@@ -1,9 +1,9 @@
-##############################################################
-#				Class for connectivity estimation			 #
-#					Nikesh Lama  August 2018				 #
-##############################################################
+#########################################################################################
+#				Class for connectivity estimation			#
+#					Nikesh Lama  August 2018			#
+#########################################################################################
 import warnings
-#lots of warning due to version mismatch for numpy,sklearn etc..
+#few warnings due to version mismatch for numpy,sklearn etc..
 warnings.filterwarnings("ignore")
 
 import numpy as np 
@@ -16,6 +16,7 @@ import networkx as nx
 from multiprocessing import Process,Pool
 import threading
 
+#This class will be populated with more methods to perform different types of operation
 class MatrixGenerate(object):
 	""" This class is a simplist approach to use the synchrony information obtained from ISI and SPIKE-distance metrics
 	to generate adjaceny matrix where nodes are the channels and the edges are the synchrony levels. 
@@ -47,44 +48,29 @@ class MatrixGenerate(object):
 		nx.draw(G, with_labels=True, node_color = 'lightblue', node_size = 100, edge_color = 'grey', linewidths = 1, font_size = 10)
 		plt.show()
 
-#
-'''
-M = MatrixGenerate()
-pd_df,links = M.generatePandasDF('isi_distance.npy')
-#print(np.load('isi_distance.npy'))
-M.GenerateGraphFromPandas(links)
-'''
 
-# def multiprocess(items, start, end):
-
-# 	for item in items[start:end]
-# 		try:
-# 			api.my_operation(item)
-# 		except Exception:
-# 				print ('Error with the item')
-
-
+#Loading array with synchrony levels
 AdjacencyArray = np.load('isi_distance.npy')
-print(AdjacencyArray.shape[0])
+#print(AdjacencyArray.shape[0])
 #rows/columns size -- since we are dealing with a square matrix one info is enough
-rows_count = AdjacencyArray.shape[0]
+rows_count = AdjacencyArray.shape[0] #
 columns_count = AdjacencyArray.shape[1]
-'''
-df = pd.DataFrame(AdjacencyArray, index = AdjacencyArray[:,0])
-#print(df.count)
-links = df.reset_index(drop = True)
-links.columns = ['var1','var2','value']
-links
-'''
+
 #lets rearrange the square matrix into a 3 column matirx where first and second columns
 #are channels and third is the synchorny between them. we will put these into a panda dataframe
 
 #df = pd.DataFrame(columns = ['Ch_A', 'Ch_B', 'SyncValue'])
 
+#empty list which will be populated
+# basically the data is in a nXn matrix. What I want to get is a lists of list of three elements --> channelA, channelB and correlation between them
+# This results in a 3 column matrix. This will later be converted into panda dataframe to fit into networkx library 
 dataframeList = []
 print(dataframeList)
 
+# looping through the numpy array, since the channel number is not explicity given but rather only the pairwise correlation is provided
+# with each iteration, the indexes are taken as channel numbers. 
 
+##TODO --> Spatial information
 
 for i in range(20): #only using 10 rows for testing
 	for j in range(20): #only using 10 columns for testing
