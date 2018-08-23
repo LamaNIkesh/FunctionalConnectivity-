@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import time
 from multiprocessing import Process,Pool
 import pandas as pd
-import readSpikeTrain
+#import readSpikeTrain
 import networkx as nx
 from multiprocessing import Process,Pool
 import threading
@@ -45,7 +45,7 @@ class MatrixGenerate(object):
 	def GenerateGraphFromPandas(self, links):
 		G  = nx.from_pandas_edgelist(links, 'Ch_A','Ch_B')
 		#plot the network
-		nx.draw(G, with_labels=True, node_color = 'lightblue', node_size = 100, edge_color = 'grey', linewidths = 1, font_size = 10)
+		nx.draw(G, with_labels=False, node_color = 'red', node_size = 50, edge_color = 'black', linewidths = 1, font_size = 4,grid = True)
 		plt.show()
 
 
@@ -72,13 +72,13 @@ print(dataframeList)
 
 ##TODO --> Spatial information
 
-for i in range(20): #only using 10 rows for testing
-	for j in range(20): #only using 10 columns for testing
+for i in range(200): #only using 10 rows for testing
+	for j in range(200): #only using 10 columns for testing
 		#print('Ch_A: {} -- Ch_B: {} -- SyncValue: {}'.format(i,j,AdjacencyArray[i,j]))
 		#df.append({'Ch_A':i, 'Ch_B':j, 'SyncValue': AdjacencyArray[i,j]}, ignore_index = True)
-		if AdjacencyArray[i][j] < 0.6 :
+		if AdjacencyArray[i][j] < 0.4 :
 			AdjacencyArray[i][j] = 0
-		elif AdjacencyArray[i][j] > 0.8:
+		elif AdjacencyArray[i][j] == 1:
 			AdjacencyArray[i][j] = 0.8
 		else:
 			pass
@@ -94,6 +94,12 @@ print (dataframeList)
 
 df = pd.DataFrame(dataframeList, columns = ['Ch_A', 'Ch_B', 'SyncValue'])
 print(df)
+links = df.loc[(df['SyncValue'] > 0.8) & (df['Ch_A'] != df['Ch_B'])]
+print (links)
 
 M = MatrixGenerate()
-M.GenerateGraphFromPandas(df)
+M.GenerateGraphFromPandas(links)
+
+
+
+
