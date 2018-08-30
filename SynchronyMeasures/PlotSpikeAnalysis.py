@@ -13,7 +13,7 @@ def multiprocessFunctions(analysis):
 		#print ('isi distance')
 		print("ISI distance calcualtion started!!!")
 		plt.figure()
-		isi_distance = spk.isi_distance_matrix(spike_trains, interval = (0,100))
+		isi_distance = spk.isi_distance_matrix(spike_trains, interval = (0,5000))
 		isi_distance[isi_distance > 1] = 1
 		print (isi_distance)
 		np.save("isi_distance", isi_distance)     
@@ -53,6 +53,7 @@ if __name__ == '__main__':
 	#spike_trains = spk.load_spike_trains_from_txt("final_interpolated.txt", edges = (0,5000))
 	#spike_trains = spk.load_spike_trains_from_txt("PySpike_testdata.txt", 4000)
 	print (len(spike_trains))
+	print (spike_trains)
 	#spike_trains = spk.load_spike_trains_from_txt("../examples/final.txt", 4000)
 	'''
 	spiketrain = []

@@ -56,18 +56,23 @@ class MatrixGenerate(object):
 			for j in range(200): #only using 200 columns for testing
 				#print('Ch_A: {} -- Ch_B: {} -- SyncValue: {}'.format(i,j,AdjacencyArray[i,j]))
 				#df.append({'Ch_A':i, 'Ch_B':j, 'SyncValue': AdjacencyArray[i,j]}, ignore_index = True)
+				'''				
 				if AdjacencyArray[i][j] < 0.4 :
 					AdjacencyArray[i][j] = 0
 				elif AdjacencyArray[i][j] == 1:
 					AdjacencyArray[i][j] = 0.8
 				else:
 					pass
+				'''
 				if AdjacencyArray[i][j]>0:	
 					data_input = [i,j,AdjacencyArray[i][j]]
 					dataframeList.append(data_input)
+
+					
 				#dataframeList[i].append(j)
 				#dataframeList[i].append(AdjacencyArray[i,j])
-				pass
+				
+				
 
 			#print('Row {} done processing!!'.format(i))        
 		print (dataframeList)
