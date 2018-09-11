@@ -58,7 +58,15 @@ def extract_channel(inputmatrix):
             spiketrain = spiketrain.sort_values(by = 'Timestamp', ascending = True)
             new = spiketrain.transpose()
             #print new
+<<<<<<< HEAD
+<<<<<<< HEAD
+            new.to_csv('final_interpolated_ret.txt', header = None, index = None, sep=' ', mode = 'a')
+=======
             new.to_csv('final_interpolated.txt', header = None, index = None, sep=' ', mode = 'a')
+>>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
+=======
+            new.to_csv('final_interpolated.txt', header = None, index = None, sep=' ', mode = 'a')
+>>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
             #
         except:
             print ("electrode not found")
@@ -66,7 +74,16 @@ def extract_channel(inputmatrix):
 
 if __name__ == '__main__':
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+    #spiketrainText = "Hippocampal_Spikes.txt"
+    spiketrainText = "retina_INT_Spikes.txt"
+=======
     spiketrainText = "Hippocampal_Spikes.txt"
+>>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
+=======
+    spiketrainText = "Hippocampal_Spikes.txt"
+>>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
     #undetemined array size
     channelId=[]
     Tmsp = []

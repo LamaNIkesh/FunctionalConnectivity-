@@ -15,6 +15,13 @@ import pandas as pd
 import networkx as nx
 from multiprocessing import Process,Pool
 import threading
+<<<<<<< HEAD
+<<<<<<< HEAD
+import itertools
+=======
+>>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
+=======
+>>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
 
 #This class will be populated with more methods to perform different types of operation
 class MatrixGenerate(object):
@@ -52,6 +59,26 @@ class MatrixGenerate(object):
 
 		##TODO --> Spatial information
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+		for i in range(1024): #only using 200 rows for testing
+			for j in range(1024): #only using 200 columns for testing
+				#print('Ch_A: {} -- Ch_B: {} -- SyncValue: {}'.format(i,j,AdjacencyArray[i,j]))
+				#df.append({'Ch_A':i, 'Ch_B':j, 'SyncValue': AdjacencyArray[i,j]}, ignore_index = True)
+								
+				if AdjacencyArray[i][j] < 0.4 :
+					AdjacencyArray[i][j] = 0
+				elif AdjacencyArray[i][j] == 1:
+					AdjacencyArray[i][j] = 1
+				else:
+					pass
+				
+				#if AdjacencyArray[i][j]>0:	
+				data_input = [i,j,AdjacencyArray[i][j]]
+				dataframeList.append(data_input)
+=======
+=======
+>>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
 		for i in range(200): #only using 200 rows for testing
 			for j in range(200): #only using 200 columns for testing
 				#print('Ch_A: {} -- Ch_B: {} -- SyncValue: {}'.format(i,j,AdjacencyArray[i,j]))
@@ -67,6 +94,10 @@ class MatrixGenerate(object):
 				if AdjacencyArray[i][j]>0:	
 					data_input = [i,j,AdjacencyArray[i][j]]
 					dataframeList.append(data_input)
+<<<<<<< HEAD
+>>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
+=======
+>>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
 
 					
 				#dataframeList[i].append(j)
@@ -75,6 +106,77 @@ class MatrixGenerate(object):
 				
 
 			#print('Row {} done processing!!'.format(i))        
+<<<<<<< HEAD
+<<<<<<< HEAD
+		#print (dataframeList)
+
+		df = pd.DataFrame(dataframeList, columns = ['Ch_A', 'Ch_B', 'SyncValue'])
+		print(df)
+		links = df.loc[(df['SyncValue'] > 0.8) & (df['Ch_A'] != df['Ch_B'])]
+		#print (links)
+		return links
+
+
+	def GenerateGraphFromPandas(self, links, channel_coordinates):
+		
+		G  = nx.from_pandas_edgelist(links, 'Ch_A', 'Ch_B', 'SyncValue')
+		edges,weights = zip(*nx.get_edge_attributes(G,'SyncValue').items())
+		
+		#pos = {0:(0,0),1:(0,1),2:(0,2),3:(0,4),4:(1,0),5:(1,1),6:(1,2),7:(1,3),8:(2,0),9:(2,1),10:(2,2),11:(2,3),12:(3,0),13:(3,1),14:(3,2),15:(3,3)}
+		pos = channel_coordinates
+		#plot the network
+		print ("Weights: {}".format(weights))
+		plt.title("Connectivity graph based on synchrony level")
+		plt.xlabel("Channel(0-64)")
+		plt.ylabel("Channel(0-64)")
+		nx.draw(G,pos, with_labels=False, node_color = 'black', node_size = 5, edgelist = edges,  edge_color = weights, linewidths = 1, font_size = 6, grid = True, edge_cmap = plt.cm.jet)
+		#nx.draw(G,pos, with_labels=False, node_color = 'blue', node_size = 10, linewidths = 1, font_size = 4,grid = True)
+		
+		plt.setp(plt.gca(), 'ylim', list(reversed(plt.getp(plt.gca(), 'ylim'))))
+		
+		
+		plt.savefig("connectivity.png")
+		plt.grid(True)
+		plt.show()
+		
+
+
+if __name__ == "__main__":
+
+	#lets createa an istance of MatrixGenerate class
+	'''	
+	M = MatrixGenerate()
+	SynchronyFileLocation = 'isi_distance.npy'
+	links = M.generatePandasDF(SynchronyFileLocation)
+	np.savetxt("links.csv",links, delimiter = ",") 
+	'''
+	#create a list of channel number and its position in a grid
+	channel_num = []
+	for i in range(1024):
+		channel_num.append(i)
+	#print(channel_num)
+	#list of grid co-ordinates
+	coordinates = []
+	x = 0
+	y = 0
+	
+	for x in range(32):
+		for y in range(32):
+			coordinates.append((y,x))
+	#print (len(coordinates))
+	#now that we have our channel number and coordinates, lets create a dictionary of channel number with its corresponding coordinates
+	pos = dict(zip(channel_num,coordinates))
+	
+	print(pos)
+	#M.GenerateGraphFromPandas(links, pos)
+	#plt.show()
+
+
+	
+
+=======
+=======
+>>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
 		print (dataframeList)
 
 		df = pd.DataFrame(dataframeList, columns = ['Ch_A', 'Ch_B', 'SyncValue'])
@@ -100,6 +202,10 @@ if __name__ == "__main__":
 	links = M.generatePandasDF(SynchronyFileLocation)
 	M.GenerateGraphFromPandas(links)
 '''
+<<<<<<< HEAD
+>>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
+=======
+>>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
 
 
 
