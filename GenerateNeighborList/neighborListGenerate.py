@@ -102,42 +102,55 @@ def neighbors(matrix, radius, rowNumber, colNumber):
 	traversal(matrix, radius, rowNumber, colNumber, traversalDirection = 'left')
 
 
+def main():
+	#-------------------------------------------------------------------------
+	#Reads a 2D csv file of channel layout and put them into a list
+	#-------------------------------------------------------------------------
 
-channel_list = []
-#lets import csv file with list of biocam probe channel numbers in 2D grid
+	#list to put all the channel numbers
+	channel_list = []
+	#lets import csv file with list of biocam probe channel numbers in 2D grid
+	with open ("ProbeLayoutBioCam.csv") as f:
+		reader = csv.reader(f)
+		for row in reader:
+			channel_list.append(row) 
 
-with open ("ProbeLayoutBioCam.csv") as f:
-	reader = csv.reader(f)
-	for row in reader:
-		channel_list.append(row) 
+	#print(channel_list)
 
-#print(channel_list)
+	channel_list = np.array(channel_list)
+	print((channel_list))
+	#print(len(channel_list))
+	#print(len(channel_list[0]))
 
-channel_list = np.array(channel_list)
-print((channel_list))
-print(len(channel_list))
-print(len(channel_list[0]))
+	#---------------------------------------------------------------------------
+	# For each channel, the neighbors are put into a row . 
+	# For eg for channel 14, the 14th row will have elements as 77,141,205,269,...
+	# See NeighborListNew_5.csv for the list of neighbors.
+	# If you want to change it to different radius just change the function argument
+	# for radius
+	#---------------------------------------------------------------------------
+	neighborList = [[]]
+	#print (channel_list)
+	rows = 64
+	columns = 64
+	if os.path.exists('NeighborListNew'):
+		os.remove('NeighborListNew')
 
+	f = open("NeighborListNew_5.csv", "w+")
 
-neighborList = [[]]
-#print (channel_list)
-rows = 64
-columns = 64
-if os.path.exists('NeighborListNew'):
-	os.remove('NeighborListNew')
+	for i in range(columns):
+		for j in range(rows):
+			neighbors(channel_list, 5, i, j)
+			f.write("\n")
+			#neighborList[0].append(neighborHolder)
+	f.close()
+	# #Finding neighbors for all the channels and writing the neighbors as a csv file indexed with the channel numbers
+	# with open ('neighborList.csv','w') as writeFile:
+	# 	#lets iterate through each 
+	# 	writer = csv.writer(writeFile)
+	# 	writer.writerows(writeFile)
+	# writeFile.close()
 
-f = open("NeighborListNew_5.csv", "w+")
-
-for i in range(columns):
-	for j in range(rows):
-		neighbors(channel_list, 5, i, j)
-		f.write("\n")
-		#neighborList[0].append(neighborHolder)
-
-f.close()
-# #Finding neighbors for all the channels and writing the neighbors as a csv file indexed with the channel numbers
-# with open ('neighborList.csv','w') as writeFile:
-# 	#lets iterate through each 
-# 	writer = csv.writer(writeFile)
-# 	writer.writerows(writeFile)
-# writeFile.close()
+if __name__ == '__main__':
+	#Magical main function
+	main()
