@@ -9,4 +9,4 @@ This folder contains pyspike library to calculate ISI and SPIKE-distance metrics
 Takes in .npy array and convert into panda dataframe to generate a simple graph with nodes being the recorded channels and undirected edges for now.
 
 
- ![sample connectivity](https://raw.githubusercontent.com/LamaNIkesh/FunctionalConnectivity-/master/images/connectivity.png)	
+ ![sample connectivity](https://raw.githubusercontent.com/LamaNIkesh/FunctionalConnectivity-/master/images/connectivity_ret.png)	
