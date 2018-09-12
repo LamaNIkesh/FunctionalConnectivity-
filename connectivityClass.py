@@ -15,13 +15,8 @@ import pandas as pd
 import networkx as nx
 from multiprocessing import Process,Pool
 import threading
-<<<<<<< HEAD
-<<<<<<< HEAD
 import itertools
-=======
->>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
-=======
->>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
+
 
 #This class will be populated with more methods to perform different types of operation
 class MatrixGenerate(object):
@@ -59,8 +54,7 @@ class MatrixGenerate(object):
 
 		##TODO --> Spatial information
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 		for i in range(1024): #only using 200 rows for testing
 			for j in range(1024): #only using 200 columns for testing
 				#print('Ch_A: {} -- Ch_B: {} -- SyncValue: {}'.format(i,j,AdjacencyArray[i,j]))
@@ -76,9 +70,7 @@ class MatrixGenerate(object):
 				#if AdjacencyArray[i][j]>0:	
 				data_input = [i,j,AdjacencyArray[i][j]]
 				dataframeList.append(data_input)
-=======
-=======
->>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
+
 		for i in range(200): #only using 200 rows for testing
 			for j in range(200): #only using 200 columns for testing
 				#print('Ch_A: {} -- Ch_B: {} -- SyncValue: {}'.format(i,j,AdjacencyArray[i,j]))
@@ -94,10 +86,6 @@ class MatrixGenerate(object):
 				if AdjacencyArray[i][j]>0:	
 					data_input = [i,j,AdjacencyArray[i][j]]
 					dataframeList.append(data_input)
-<<<<<<< HEAD
->>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
-=======
->>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
 
 					
 				#dataframeList[i].append(j)
@@ -106,8 +94,7 @@ class MatrixGenerate(object):
 				
 
 			#print('Row {} done processing!!'.format(i))        
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 		#print (dataframeList)
 
 		df = pd.DataFrame(dataframeList, columns = ['Ch_A', 'Ch_B', 'SyncValue'])
@@ -171,27 +158,6 @@ if __name__ == "__main__":
 	#M.GenerateGraphFromPandas(links, pos)
 	#plt.show()
 
-
-	
-
-=======
-=======
->>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
-		print (dataframeList)
-
-		df = pd.DataFrame(dataframeList, columns = ['Ch_A', 'Ch_B', 'SyncValue'])
-		#print(df)
-		links = df.loc[(df['SyncValue'] > 0.8) & (df['Ch_A'] != df['Ch_B'])]
-		print (links)
-		return links
-
-
-	def GenerateGraphFromPandas(self, links):
-		G  = nx.from_pandas_edgelist(links, 'Ch_A','Ch_B')
-		#plot the network
-		nx.draw(G, with_labels=True, node_color = 'red', node_size = 50, edge_color = 'black', linewidths = 1, font_size = 4,grid = True)
-		plt.show()
-
 '''
 if __name__ == "__main__":
 
@@ -202,10 +168,6 @@ if __name__ == "__main__":
 	links = M.generatePandasDF(SynchronyFileLocation)
 	M.GenerateGraphFromPandas(links)
 '''
-<<<<<<< HEAD
->>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
-=======
->>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
 
 
 

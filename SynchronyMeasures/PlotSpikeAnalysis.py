@@ -13,24 +13,15 @@ def multiprocessFunctions(analysis):
 		#print ('isi distance')
 		print("ISI distance calcualtion started!!!")
 		plt.figure()
-<<<<<<< HEAD
-<<<<<<< HEAD
 		isi_distance = spk.isi_distance_matrix(spike_trains, interval = None)
 		isi_distance[isi_distance > 1] = 1
 		print (isi_distance)
 		np.save("isi_distance", isi_distance)
 		np.savetxt("isi_distance.csv",isi_distance, delimiter = ",")     
-=======
-=======
->>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
 		isi_distance = spk.isi_distance_matrix(spike_trains, interval = (0,5000))
 		isi_distance[isi_distance > 1] = 1
 		print (isi_distance)
 		np.save("isi_distance", isi_distance)     
-<<<<<<< HEAD
->>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
-=======
->>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
 		plt.imshow(isi_distance,clim=(0.0, 1.0), interpolation='nearest')
 		plt.colorbar()
 		plt.title("ISI-distance(0-100ms)")
@@ -63,19 +54,14 @@ def multiprocessFunctions(analysis):
 if __name__ == '__main__':
 
 	start_time = time.time()
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	spike_trains = spk.load_spike_trains_from_txt("final_interpolated.txt", 5000, separator = " ", is_sorted = True, ignore_empty_lines = False)
-=======
-	spike_trains = spk.load_spike_trains_from_txt("final_interpolated.txt", 5000)
->>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
-=======
-	spike_trains = spk.load_spike_trains_from_txt("final_interpolated.txt", 5000)
->>>>>>> 0cedc72f5f2d2fc87dd0013b90157c1498ad2a7e
+	#spike_trains = spk.load_spike_trains_from_txt("final_interpolated.txt", 5000)
+	#spike_trains = spk.load_spike_trains_from_txt("final_interpolated.txt", 5000)
 	#spike_trains = spk.load_spike_trains_from_txt("final_interpolated.txt", edges = (0,5000))
 	#spike_trains = spk.load_spike_trains_from_txt("PySpike_testdata.txt", 4000)
-	print (len(spike_trains))
-	print (spike_trains)
+	#print (len(spike_trains))
+	#print (spike_trains)
 	#spike_trains = spk.load_spike_trains_from_txt("../examples/final.txt", 4000)
 	'''
 	spiketrain = []
